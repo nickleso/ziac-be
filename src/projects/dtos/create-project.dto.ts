@@ -2,10 +2,9 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  Matches,
   MaxLength,
   MinLength,
-} from 'class-validator';
+} from '@nestjs/class-validator';
 
 export class CreateProjectDto {
   @IsString()

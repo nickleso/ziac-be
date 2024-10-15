@@ -16,7 +16,9 @@ import { PatchProjectDto } from './dtos/patch-projects.dto';
 
 @Controller('projects')
 export class ProjectsController {
-  // Injecting Projects Service
+  /*
+   * Injecting Projects Service
+   */
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get('/:id?')
@@ -24,13 +26,12 @@ export class ProjectsController {
     @Param() getProjectParamDto: GetProjectsParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-  ): string {
-    return this.projectsService.findAll();
+  ) {
+    return this.projectsService.findAll(getProjectParamDto, limit, page);
   }
 
   @Post()
-  public createUsers(@Body() createProjectDto: CreateProjectDto) {
-    console.log(createProjectDto instanceof CreateProjectDto);
+  public createProject(@Body() createProjectDto: CreateProjectDto) {
     return 'You sent a post request to Projects endpoint';
   }
 
