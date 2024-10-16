@@ -4,7 +4,7 @@ import {
   IsString,
   MaxLength,
   MinLength,
-} from '@nestjs/class-validator';
+} from 'class-validator';
 
 export class CreateProjectDto {
   @IsString()
