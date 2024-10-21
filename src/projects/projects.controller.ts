@@ -23,7 +23,6 @@ export class ProjectsController {
    */
   constructor(private readonly projectsService: ProjectsService) {}
 
-  @Get('/:id?')
   @ApiOperation({
     summary: 'Fetches a list of projects of the application.',
   })
@@ -46,7 +45,8 @@ export class ProjectsController {
     status: 200,
     description: 'Projects fetched successfully based on the query',
   })
-  getProjects(
+  @Get('/:id?')
+  public getProjects(
     @Param() getProjectParamDto: GetProjectsParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
@@ -55,7 +55,7 @@ export class ProjectsController {
   }
 
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'Project added successfully',
   })
   @ApiOperation({

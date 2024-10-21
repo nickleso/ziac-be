@@ -1,4 +1,12 @@
 import { CreateProjectDto } from './create-project.dto';
-import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
-export class PatchProjectDto extends PartialType(CreateProjectDto) {}
+export class PatchProjectDto extends PartialType(CreateProjectDto) {
+  @ApiProperty({
+    description: 'The ID of the project that needs to be updated',
+  })
+  @IsInt()
+  @IsNotEmpty()
+  id: number;
+}
