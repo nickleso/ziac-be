@@ -54,11 +54,26 @@ export class ProjectsController {
     return this.projectsService.findAll(getProjectParamDto, limit, page);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'Project added successfully',
+  })
+  @ApiOperation({
+    summary: 'Added a new project to the application.',
+  })
   @Post()
   public createProject(@Body() createProjectDto: CreateProjectDto) {
+    console.log(createProjectDto);
     return 'You sent a post request to Projects endpoint';
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'Project updated successfully',
+  })
+  @ApiOperation({
+    summary: 'Updated existing project of the application.',
+  })
   @Patch()
   public patchProject(@Body() patchProjectDto: PatchProjectDto) {
     return patchProjectDto;
