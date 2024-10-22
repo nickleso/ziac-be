@@ -33,6 +33,7 @@ console.log(ENV);
 
         // !!! In production change on `false` !!!
         synchronize: true,
+        autoLoadEntities: true,
       }),
     }),
   ],
