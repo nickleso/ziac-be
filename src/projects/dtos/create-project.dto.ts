@@ -27,7 +27,7 @@ export class CreateProjectDto {
   @IsString()
   @IsOptional()
   @MinLength(3)
-  @MaxLength(1000)
+  @MaxLength(1024)
   description?: string;
 
   // @ApiPropertyOptional({

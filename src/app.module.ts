@@ -3,16 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
 import { AuthModule } from './auth/auth.module';
-import { ProjectsController } from './projects/projects.controller';
-import { ProjectsService } from './projects/providers/projects.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import enviromentValidation from './config/environment.validation';
-import { User } from './users/user.entity';
-import { UsersService } from './users/providers/users.service';
+import { Users } from './users/users.entity';
 import { UsersModule } from './users/users.module';
+import { HealthCheckController } from './healthcheck/healthcheck.controller';
 
 const ENV = process.env.NODE_ENV;
 
@@ -20,6 +18,7 @@ const ENV = process.env.NODE_ENV;
   imports: [
     ProjectsModule,
     AuthModule,
+    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
@@ -36,16 +35,13 @@ const ENV = process.env.NODE_ENV;
         password: configService.get<string>('database.password'),
         host: configService.get<string>('database.host'),
         database: configService.get<string>('database.name'),
-
-        // !!! In production change on `false` !!!
-        synchronize: true,
+        synchronize: true, // Змінити на false у продакшн середовищі
         autoLoadEntities: true,
-        entities: [User],
+        entities: [Users],
       }),
     }),
-    UsersModule,
   ],
-  controllers: [AppController, ProjectsController],
-  providers: [AppService, ProjectsService, ProjectsService, UsersService],
+  controllers: [AppController, HealthCheckController],
+  providers: [AppService],
 })
 export class AppModule {}
