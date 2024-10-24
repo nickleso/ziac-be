@@ -10,9 +10,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import enviromentValidation from './config/environment.validation';
+import { User } from './users/user.entity';
+import { UsersService } from './users/providers/users.service';
+import { UsersModule } from './users/users.module';
 
 const ENV = process.env.NODE_ENV;
-console.log(ENV);
 
 @Module({
   imports: [
@@ -38,11 +40,12 @@ console.log(ENV);
         // !!! In production change on `false` !!!
         synchronize: true,
         autoLoadEntities: true,
-        // entities: [],
+        entities: [User],
       }),
     }),
+    UsersModule,
   ],
   controllers: [AppController, ProjectsController],
-  providers: [AppService, ProjectsService, ProjectsService],
+  providers: [AppService, ProjectsService, ProjectsService, UsersService],
 })
 export class AppModule {}
