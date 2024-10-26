@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   DefaultValuePipe,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -63,8 +64,7 @@ export class ProjectsController {
   })
   @Post()
   public createProject(@Body() createProjectDto: CreateProjectDto) {
-    console.log(createProjectDto);
-    return 'You sent a post request to Projects endpoint';
+    return this.projectsService.create(createProjectDto);
   }
 
   @ApiResponse({
@@ -77,5 +77,17 @@ export class ProjectsController {
   @Patch()
   public patchProject(@Body() patchProjectDto: PatchProjectDto) {
     return patchProjectDto;
+  }
+
+  @ApiResponse({
+    status: 200,
+    description: 'Project deleted successfully',
+  })
+  @ApiOperation({
+    summary: 'Deleted existing project of the application.',
+  })
+  @Delete('/:id')
+  public deleteProject(@Param() getProjectParamDto: GetProjectsParamDto) {
+    return this.projectsService.delete(getProjectParamDto.id);
   }
 }

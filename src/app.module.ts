@@ -37,7 +37,7 @@ const ENV = process.env.NODE_ENV;
         database: configService.get<string>('database.name'),
         synchronize: true, // Змінити на false у продакшн середовищі
         autoLoadEntities: true,
-        entities: [Users],
+        // entities: [Users],
       }),
     }),
   ],

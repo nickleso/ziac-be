@@ -20,7 +20,6 @@ export class Projects {
 
   @Column({
     type: 'text',
-    length: 1024,
     nullable: true,
   })
   description?: string;
