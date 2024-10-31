@@ -50,9 +50,8 @@ export class UsersService {
    * Public method used to find one user using the ID of the user
    */
   public async findOneById(getUserParamDto: GetUsersParamDto) {
-    let user = await this.usersRepository.findOneBy({
+    return await this.usersRepository.findOneBy({
       id: Number(getUserParamDto.id),
     });
-    return user;
   }
 }
